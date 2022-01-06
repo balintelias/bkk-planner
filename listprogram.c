@@ -1,19 +1,18 @@
 /*
+BKK útvonaltervező program
 
-2021. 12. 06.
-BMEVIHIAA01 - A programozás alapjai 1
-Házi feladat
+A program a villamosmérnöki alapképzés BMEVIHIAA01 - A programozás alapjai 1 házi feladatának folytatása.
 
-Bálint Éliás, G5RXH0, 3. IMSc tankör
-Útvonaltervező program
-
-A program két bemeneti fájlból épít fel egy buszhálózatot menetrenddel együtt,
+A háziban elkészített program két bemeneti fájlból épít fel egy buszhálózatot menetrenddel együtt,
 majd a felhasználói kérésből kiszámítja a legolcsóbb útvonalat,
 illetve azt, amelyben az utak időbeli hossza a legrövidebb.
 Amennyiben ezek megegyeznek, kiírja az útvonalat, amennyiben a kettő különbözik,
 kiírja a legolcsóbbat az árával együtt, az időben rövidebbet pedig a járatokon töltött idő összegével,
 illetve ekkor a program kiírja az első busz indulásáig hátralévő időt is.
 
+Problémák: az eredeti program távolsági buszhálózatot szimulált, a járatok két végpont között közlekedtek.
+A menetrend formájától függ sokminden, ezért első körben azt kell megkeresni.
+Menetrend forrása: https://bkk.hu/gtfs/budapest_gtfs.zip
 */
 
 #include <stdio.h>
