@@ -20,7 +20,7 @@ Menetrend forrása: https://bkk.hu/gtfs/budapest_gtfs.zip
 #include <stdlib.h>
 #include <string.h>
 //#include "debugmalloc.h"
-#include "header.h"
+#include "func.h"
 
 int main(void)
 {

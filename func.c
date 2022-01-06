@@ -1,63 +1,8 @@
-struct _city;
-struct _adjacency;
-
-typedef enum _print
-{
-    TIME,
-    PRICE,
-    NONE
-} print; //az útvonalat kiíró függvény argumentuma
-
-typedef struct time
-{
-    int hour, min, sec;
-} time; //időpont és időtartam tárolására alkalmas struktúra
-
-typedef struct _city
-{
-    char name[4];
-    int reached;
-    int distance;
-    struct _city *settingCity;
-
-    struct _adjacency *head;
-
-    struct _city *next;
-
-} city; /*az adatszerkezet külső listája, gerince.
-fésűs lista, városokat tárol, a fogak pedig a szomszédos városokat szomszédossági listaként.
-*/
-
-typedef struct _departure
-{
-    time depart;
-
-    struct _departure *next;
-} departure; /*az adatszerkezet belső listája.
-Egy járat indulási időpontjait tárolja.*/
-
-typedef struct _adjacency
-{
-    char id[5];
-    city *destination;
-    time length;
-    int price;
-
-    struct _departure *depart;
-
-    struct _adjacency *next;
-} adjacency; /* az adatszerkezet közbülső listája.
-A city típusú fésűs lista foga, de maga is fésűs lista.
-elemei járatok, fogai a járatok indulási időpontjai listában tárolva.
-*/
-
-typedef struct _route
-{
-    city *node;
-    int distance;
-
-    struct _route *next;
-} route; /*A megkeresett útvonalakat ilyen típusú listákba építjük fel*/
+#include <stdio.h>
+#include <limits.h>
+#include <stdlib.h>
+#include <string.h>
+#include "func.h"
 
 int time2sec(time x) //átváltás típusok között
 {
@@ -369,10 +314,10 @@ city *dijkstraByTime(city *cities) //válaszkereső algoritmus
     while (isFinished(cities))
     {
         p = cities;
-        int minimum = INT_MIN;
+        int minimum = INT_MAX;
         while (p != NULL)
         {
-            if (p->distance > minimum && !(p->reached))
+            if (p->distance < minimum && !(p->reached))
             {
                 minimum = p->distance;
                 current = p;
@@ -390,7 +335,7 @@ city *dijkstraByTime(city *cities) //válaszkereső algoritmus
         {
             int calculated;
             calculated = current->distance + time2sec(q->length);
-            if (calculated > (q->destination)->distance)
+            if (calculated < (q->destination)->distance)
             {
                 //élmenti javítás
                 (q->destination)->distance = calculated;
@@ -409,7 +354,7 @@ city *resetGraph(city *cities, char start[]) //a gráfot előkészíti a válasz
     city *p = cities;
     while (p != NULL) //távolság és elértség visszaállítása
     {
-        p->distance = INT_MIN;
+        p->distance = INT_MAX - 1;
         p->reached = 0;
         p->settingCity = NULL;
         p = p->next;
