@@ -1,18 +1,16 @@
 /*
-BKK útvonaltervező program
+BKK route planner
 
-A program a villamosmérnöki alapképzés BMEVIHIAA01 - A programozás alapjai 1 házi feladatának folytatása.
+The program is based on a homework from Basics of Programming 1 in Electrical Engineering BSc.
 
-A háziban elkészített program két bemeneti fájlból épít fel egy buszhálózatot menetrenddel együtt,
-majd a felhasználói kérésből kiszámítja a legolcsóbb útvonalat,
-illetve azt, amelyben az utak időbeli hossza a legrövidebb.
-Amennyiben ezek megegyeznek, kiírja az útvonalat, amennyiben a kettő különbözik,
-kiírja a legolcsóbbat az árával együtt, az időben rövidebbet pedig a járatokon töltött idő összegével,
-illetve ekkor a program kiírja az első busz indulásáig hátralévő időt is.
+The original program built a bus network with departures, and then found the cheapest and the fastest route between two cities, 
+where fastest meant that the route with the least amount of time spent travelling (without changes).
+In the case of these two routes being the same, it gave back the route itself, if the two were different,
+it gave back both with their price/time and for the latter it gave the time until the first departure.
 
-Problémák: az eredeti program távolsági buszhálózatot szimulált, a járatok két végpont között közlekedtek.
-A menetrend formájától függ sokminden, ezért első körben azt kell megkeresni.
-Menetrend forrása: https://bkk.hu/gtfs/budapest_gtfs.zip
+The problems include: the lines travel between two points, and I only have access to the network in GTFS-format.
+I need to study the documentation of GTFS before starting to work on the new (and actually useful) version.
+The source of GTFS-input: https://bkk.hu/gtfs/budapest_gtfs.zip
 */
 
 #include <stdio.h>
@@ -22,7 +20,7 @@ Menetrend forrása: https://bkk.hu/gtfs/budapest_gtfs.zip
 //#include "debugmalloc.h"
 #include "func.h"
 
-int main(void)
+int main(void)  
 {
     FILE *input1, *input2;
     char filename1[100], filename2[100];

@@ -11,12 +11,12 @@ typedef enum _print
     TIME,
     PRICE,
     NONE
-} print; //az útvonalat kiíró függvény argumentuma
+} print; //argument of the route printing function
 
 typedef struct time
 {
     int hour, min, sec;
-} time; //időpont és időtartam tárolására alkalmas struktúra
+} time; //struct for time and timespan
 
 typedef struct _city
 {
@@ -64,39 +64,39 @@ typedef struct _route
     struct _route *next;
 } route; /*A megkeresett útvonalakat ilyen típusú listákba építjük fel*/
 
-int time2sec(time x); //átváltás típusok között
+int time2sec(time x); //conversion between types
 
-time sec2time(int x); //átváltás típusok között
+time sec2time(int x); //conversion between types
 
 int isInCities(char name[4], city *cities); //a city lista feltöltéséhez szükséges függvény, logikai értéket ad vissza
 
-city *expandAdjacency(adjacency *new, city *cities, char start[], char destination[]); //listabővítő függvény
+city *expandAdjacency(adjacency *new, city *cities, char start[], char destination[]); //expanding a list
 
-city *expandCities(city *new, city *cities); //listabővítő függvény
+city *expandCities(city *new, city *cities); //expanding a list
 
 int isFinished(city *cities); //válaszkereső algoritmus futási feltétele, logikai értéket ad vissza
 
-city *readGraph(FILE *input1, city *cities);
+city *readGraph(FILE *input1, city *cities); //első fájlt beolvasó függvény
 
-city *readDepartures(FILE *input2, city *cities);
+city *readDepartures(FILE *input2, city *cities); //második fájlt beolvasó függvény
 
-void printCities(city *cities);
+void printCities(city *cities); //kiírja a lista minden elemének nevét a standard output-ra
 
-city *dijkstraByPrice(city *cities);
+city *dijkstraByPrice(city *cities); //válaszkereső algoritmus
 
-city *dijkstraByTime(city *cities);
+city *dijkstraByTime(city *cities); //válaszkereső algoritmus
 
-city *resetGraph(city *cities, char start[]);
+city *resetGraph(city *cities, char start[]); //a gráfot előkészíti a válaszkereső algoritmusnak
 
-route *flip(route *head);
+route *flip(route *head); //újraláncol egy listát fordított sorrendben
 
-route *buildRoute(city *cities, char destination[]);
+route *buildRoute(city *cities, char destination[]); //a beállító csúcsok alapján készíti el egy útvonal listáját
 
-int cmpRoutes(route *first, route *second);
+int cmpRoutes(route *first, route *second); //útvonalakat hasonlít össze, logikai értéket ad vissza
 
-void printRoute(route *head, print type, time userInput);
+void printRoute(route *head, print type, time userInput); //a választ kiíró függvény
 
-void freeRoute(route *head);
+void freeRoute(route *head); //felszabadít egy útvonal listát
 
-void freeGraph(city *cities);
+void freeGraph(city *cities); //felszabadítja a gráfot tároló duplán fésűs listát
 #endif
