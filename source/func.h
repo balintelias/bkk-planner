@@ -3,100 +3,70 @@
 
 #include <stdio.h>
 
-struct _city;
-struct _adjacency;
+typedef struct stop{
+    char stop_id[7];
+    char *stop_name; //UTF-8
+    char *stop_code;
+    double stop_lat, stop_lon;
+    int location_type;
+    int  location_sub_type;
+    char *parent_station; //ID referencing stops.stop_id
+} stop;
 
-typedef enum _print
-{
-    TIME,
-    PRICE,
-    NONE
-} print; //argument of the route printing function
+typedef struct route{
+    char agency_id[10];
+    int route_id;
+    char route_short_name[10];
+    char route_long_name[50];
+    char route_desc[200];
+    char route_color[7];
+    char route_text_color[7];
+    int route_sort_order;
+    char route_icon_display_text[10];
+} route;
+
+typedef struct pathway{
+    char pathway_id[20];
+    int pathway_mode;
+    int is_bidirectional;
+    char from_stop_id[10];
+    char to_stop_id[10];
+    int traversal_time;
+} pathway;
+
+typedef struct trip{
+    int route_id; //maybe pointer
+    char trip_id[20];
+    char service_id[30]; //maybe pointer
+    char trip_headsign[50]; //UTF-8
+    int direction_id;
+    char block_id[30];
+    char shape_id[10]; //maybe pointer
+    int wheelchair_accessible;
+    int bikes_allowed;
+    int boarding_door;
+} trip;
+
+typedef struct stop_time{
+
+} stop_time;
 
 typedef struct time
 {
     int hour, min, sec;
 } time; //struct for time and timespan
 
-typedef struct _city
-{
-    char name[4];
-    int reached;
-    int distance;
-    struct _city *settingCity;
-
-    struct _adjacency *head;
-
-    struct _city *next;
-
-} city; /*az adatszerkezet külső listája, gerince.
-fésűs lista, városokat tárol, a fogak pedig a szomszédos városokat szomszédossági listaként.
-*/
-
-typedef struct _departure
-{
-    time depart;
-
-    struct _departure *next;
-} departure; /*az adatszerkezet belső listája.
-Egy járat indulási időpontjait tárolja.*/
-
-typedef struct _adjacency
-{
-    char id[5];
-    city *destination;
-    time length;
-    int price;
-
-    struct _departure *depart;
-
-    struct _adjacency *next;
-} adjacency; /* az adatszerkezet közbülső listája.
-A city típusú fésűs lista foga, de maga is fésűs lista.
-elemei járatok, fogai a járatok indulási időpontjai listában tárolva.
-*/
-
-typedef struct _route
-{
-    city *node;
-    int distance;
-
-    struct _route *next;
-} route; /*A megkeresett útvonalakat ilyen típusú listákba építjük fel*/
-
 int time2sec(time x); //conversion between types
 
 time sec2time(int x); //conversion between types
 
-int isInCities(char name[4], city *cities); //a city lista feltöltéséhez szükséges függvény, logikai értéket ad vissza
+int importStops(FILE *input); //function for importing stops.txt
 
-city *expandAdjacency(adjacency *new, city *cities, char start[], char destination[]); //expanding a list
+int importRoutes(FILE *input); //function for importing routes.txt
 
-city *expandCities(city *new, city *cities); //expanding a list
+int importPathways();
 
-int isFinished(city *cities); //válaszkereső algoritmus futási feltétele, logikai értéket ad vissza
+int importTrips();
 
-city *readGraph(FILE *input1, city *cities); //első fájlt beolvasó függvény
-
-city *readDepartures(FILE *input2, city *cities); //második fájlt beolvasó függvény
-
-void printCities(city *cities); //kiírja a lista minden elemének nevét a standard output-ra
-
-city *dijkstraByPrice(city *cities); //válaszkereső algoritmus
-
-city *dijkstraByTime(city *cities); //válaszkereső algoritmus
-
-city *resetGraph(city *cities, char start[]); //a gráfot előkészíti a válaszkereső algoritmusnak
-
-route *flip(route *head); //újraláncol egy listát fordított sorrendben
-
-route *buildRoute(city *cities, char destination[]); //a beállító csúcsok alapján készíti el egy útvonal listáját
-
-int cmpRoutes(route *first, route *second); //útvonalakat hasonlít össze, logikai értéket ad vissza
-
-void printRoute(route *head, print type, time userInput); //a választ kiíró függvény
-
-void freeRoute(route *head); //felszabadít egy útvonal listát
-
-void freeGraph(city *cities); //felszabadítja a gráfot tároló duplán fésűs listát
+int importStopTimes();
 #endif
