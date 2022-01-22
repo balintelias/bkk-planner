@@ -1,2 +1,7 @@
 /.vscode
-*/a.out
+
+#executables
+/a.out
+/source/a.out
+/reader/a.out
+/reader/reader

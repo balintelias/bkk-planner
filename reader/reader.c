@@ -17,13 +17,17 @@ int main(void)
     if (!input)
         return 1;
 
+    /*wint_t buffer;
     wchar_t c;
-    c = WCHAR_MAX;
-    printf("%04X\n", c);
-    printf("%ld\n", sizeof(wchar_t));
-    while (c = fgetwc(input), c != WEOF)
-        printf("%04X\n", c);
-
+    buffer = __WINT_MAX__;
+    printf("%d\n", buffer);
+    printf("%04X\n", buffer);
+    printf("%ld\n", sizeof(wint_t));*/
+    wint_t c;
+    while ((c = getwc(input)) != WEOF)
+    {
+        printf("%lc", c);
+    }
     fclose(input);
     return 0;
 }
