@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <uchar.h>
-#include "func.h"
+#include "header.h"
 
 int time2sec(time x) //conversion between types
 {
