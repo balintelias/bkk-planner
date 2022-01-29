@@ -19,6 +19,9 @@ int importStops(stop *stops)
     }
     
     
+    
+    //salalala ez a remote file
+    
 }
 
 int importAgency();
