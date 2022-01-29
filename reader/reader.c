@@ -13,6 +13,6 @@ For example the output may be .xml, .json, or some other markup language.
 
 int main(void)
 {
-
+  
   return 0;
 }
