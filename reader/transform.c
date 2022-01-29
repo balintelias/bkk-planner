@@ -21,6 +21,7 @@ int importStops(stop *stops)
     
     
     //salalala ez a remote file
+    //slalalalalala ez is
     
 }
 
