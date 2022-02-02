@@ -36,6 +36,9 @@ content = content.replace('Á', 'A')
 content = content.replace('Ű', 'U')
 content = content.replace('Í', 'I')
 
+if(content[-1] == '\n'):
+    content = content[:-1]
+
 #write output into file
 ofile.write(content)
 

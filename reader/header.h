@@ -1,5 +1,5 @@
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
+#ifndef HEADER_H
+#define HEADER_H
 
 enum node_type
 {
@@ -83,6 +83,6 @@ typedef struct time
     int hour, min, sec;
 } time; //struct for time and timespan
 
-int importStops(stop *stops);
+int importStops(node *stops);
 
 #endif

@@ -9,10 +9,16 @@ For example the output may be .xml, .json, or some other markup language.
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "transform.h"
+#include "header.h"
 
 int main(void)
 {
-  
-  return 0;
+    node *stops;
+    int n = importStops(stops);
+    //for (int i = 0; i < n; i++)
+    {
+        printf("%s\n", stops[0].node_id);
+    }
+
+    return 0;
 }

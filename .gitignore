@@ -1,8 +1,9 @@
 /.vscode
 
 #executables
-/a.out
-/source/a.out
-/reader/a.out
+*.out
 /reader/reader
+
+/source/source
 *.csv
+*.gch

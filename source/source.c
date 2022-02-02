@@ -18,7 +18,7 @@ The source of GTFS-input: https://bkk.hu/gtfs/budapest_gtfs.zip
 #include <stdlib.h>
 #include <string.h>
 //#include "debugmalloc.h"
-#include "func.h"
+#include "header.h"
 
 int main(void)  
 {
