@@ -31,7 +31,7 @@ typedef struct stop
     double stop_lat, stop_lon;
     int location_type;
     int location_sub_type;
-    char parent_station[7]; //ID referencing stops.stop_id
+    char parent_station[7];  //ID referencing stops.stop_id
     int wheelchair_boarding; //enum?
     int stop_direction;
 } stop;
@@ -82,6 +82,8 @@ typedef struct time
 {
     int hour, min, sec;
 } time; //struct for time and timespan
+
+int getSize(char *filename);
 
 int importStops(node *stops);
 

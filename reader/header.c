@@ -5,7 +5,7 @@
 
 #define LENGTH 1000
 
-int importStops(node *stops)
+/*int importStops(node *stops)
 {
     FILE *input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
     if (input == NULL)
@@ -21,6 +21,7 @@ int importStops(node *stops)
             linesCount++;
     }
     fclose(input);
+    return linesCount;
 
     char line[LENGTH];
     int i;
@@ -38,12 +39,55 @@ int importStops(node *stops)
         memset(line, '\0', LENGTH);
     }
     return i;
+}*/
+
+int getSize(char *filename)
+{
+    return 0;
 }
 
-int importAgency();
+int importStops(node *stops)
+{
+    FILE *input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
+    if (input == NULL)
+    {
+        printf("couldn't open stops-test.csv.");
+        return -1;
+    }
+    printf("file opened\n"); //dbg
+    char ch;
+    int linesCount = 0;
+    while ((ch = fgetc(input)) != EOF)
+    {
+        if (ch == '\n')
+            linesCount++;
+    }
+    printf("lines: %d\n", linesCount); //dbg
+    fclose(input);
+    input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
+    char line[LENGTH];
+    fgets(line, LENGTH, input);
+    printf("elso sor:\n%s\n\n", line); //dbbg
+    stops = (node *)realloc(stops, linesCount * sizeof(node));
+    for (int i = 0; i < linesCount; i++)
+    {
+        fgets(line, LENGTH, input);
+        printf("%s", line); //dbg
+        strncpy(stops[i].node_id, line, 6);
+        //stops[i].node_id[7] = '\0'; ez elvileg nem kell
+        memmove(line, line + 7, strlen(line) - 7);
+        //printf("%s\n", stops[i].node_id);
+        //printf("%s", line);
+        memset(line, '\0', LENGTH);
+    }
+    fclose(input);
+    return linesCount;
+}
 
-int importCalendarDates();
+//int importAgency();
 
-int importFeedInfo();
+//int importCalendarDates();
 
-int import();
+//int importFeedInfo();
+
+//int import();
