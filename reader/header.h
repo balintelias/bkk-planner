@@ -18,7 +18,7 @@ typedef struct node
     double node_lat, node_lon;
     char node_code[20];
     enum node_type type;
-    //locaton_sub_type;
+    //location_sub_type;
     int parent_station_index;
     int wheelchair_boarding; //enum?
     int stop_direction;
@@ -85,6 +85,6 @@ typedef struct time
 
 int getSize(char *filename);
 
-int importStops(node *stops);
+int importStops(node *stops, int linesCount);
 
 #endif

@@ -5,6 +5,7 @@
 
 #define LENGTH 1000
 
+//solve it with double indirection
 /*int importStops(node *stops)
 {
     FILE *input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
@@ -21,37 +22,36 @@
             linesCount++;
     }
     fclose(input);
-    return linesCount;
+    //return linesCount;
 
     char line[LENGTH];
     int i;
-    stops = (node*)malloc(linesCount*sizeof(node));
+    stops = (node*)realloc(stops, linesCount*sizeof(node));
     input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
     fgets(line, LENGTH, input); //delete first line
+    printf("first line: %s\n", line);
     memset(line, '\0', LENGTH);
+    printf("first line after: %s\n\n", line);
     for (i = 0; i < linesCount; i++)
     {
         fgets(line, LENGTH, input);
         strncpy(stops[i].node_id, line, 6);
+        stops[i].node_id[6] = '\0';
         memmove(line, line + 7, strlen(line));
-        printf("%s\n", stops[i].node_id);
-        printf("%s", line);
+        //printf("%s\n", stops[i].node_id);
+        //printf("%s\n", line);
         memset(line, '\0', LENGTH);
     }
-    return i;
+    return linesCount;
 }*/
 
+//solve it w getSize fv
 int getSize(char *filename)
 {
-    return 0;
-}
-
-int importStops(node *stops)
-{
-    FILE *input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
+    FILE *input = fopen(filename, "r");
     if (input == NULL)
     {
-        printf("couldn't open stops-test.csv.");
+        printf("couldn't open %s.\n", filename);
         return -1;
     }
     printf("file opened\n"); //dbg
@@ -64,24 +64,32 @@ int importStops(node *stops)
     }
     printf("lines: %d\n", linesCount); //dbg
     fclose(input);
-    input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
+    return linesCount;
+}
+
+int importStops(node *stops, int linesCount)
+{
+    //int linesCount; //not assigned yet
+    FILE *input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
     char line[LENGTH];
     fgets(line, LENGTH, input);
-    printf("elso sor:\n%s\n\n", line); //dbbg
-    stops = (node *)realloc(stops, linesCount * sizeof(node));
+
+    //printf("elso sor:\n%s\n\n", line); //dbbg
+
+    //stops = (node *)realloc(stops, linesCount * sizeof(node));
     for (int i = 0; i < linesCount; i++)
     {
         fgets(line, LENGTH, input);
-        printf("%s", line); //dbg
+        //printf("%s", line); //dbg
         strncpy(stops[i].node_id, line, 6);
-        //stops[i].node_id[7] = '\0'; ez elvileg nem kell
+        stops[i].node_id[6] = '\0'; //ez elvileg nem kell
         memmove(line, line + 7, strlen(line) - 7);
         //printf("%s\n", stops[i].node_id);
         //printf("%s", line);
         memset(line, '\0', LENGTH);
     }
     fclose(input);
-    return linesCount;
+    return 0;
 }
 
 //int importAgency();

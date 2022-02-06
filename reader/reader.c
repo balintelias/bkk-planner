@@ -14,14 +14,16 @@ For example the output may be .xml, .json, or some other markup language.
 
 int main(void)
 {
-    node *stops;
-    int size = getSize()
-    stops = (node*)malloc(size*sizeof(node));
-    printf("arraysize: %ld\n", sizeof(stops));
-    int n = importStops(stops);
-    printf("\n\nreturn value: %d\n", n); //dbg
-    //for (int i = 0; i < n; i++)
-    printf("arraysize: %ld\n", sizeof(stops));
+    node *stops = (node *)malloc(sizeof(node));
+    char filename[100] = "/home/elijah/PROGprojects/bkk/ascii/stops-test.csv";
+    int size = getSize(filename);
+    stops = (node *)malloc(size * sizeof(node));
+    
+    int n = importStops(stops, size);
 
+    for (int i = 0; i < size; i++)
+    {
+        printf("%s\n", stops[i].node_id);
+    }
     return 0;
 }
