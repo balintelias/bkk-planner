@@ -69,23 +69,16 @@ int getSize(char *filename)
 
 int importStops(node *stops, int linesCount)
 {
-    //int linesCount; //not assigned yet
     FILE *input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
     char line[LENGTH];
     fgets(line, LENGTH, input);
 
-    //printf("elso sor:\n%s\n\n", line); //dbbg
-
-    //stops = (node *)realloc(stops, linesCount * sizeof(node));
     for (int i = 0; i < linesCount; i++)
     {
         fgets(line, LENGTH, input);
-        //printf("%s", line); //dbg
         strncpy(stops[i].node_id, line, 6);
-        stops[i].node_id[6] = '\0'; //ez elvileg nem kell
+        stops[i].node_id[6] = '\0';
         memmove(line, line + 7, strlen(line) - 7);
-        //printf("%s\n", stops[i].node_id);
-        //printf("%s", line);
         memset(line, '\0', LENGTH);
     }
     fclose(input);

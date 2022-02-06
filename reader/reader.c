@@ -14,16 +14,12 @@ For example the output may be .xml, .json, or some other markup language.
 
 int main(void)
 {
+    //schematic for reading files:
     node *stops = (node *)malloc(sizeof(node));
     char filename[100] = "/home/elijah/PROGprojects/bkk/ascii/stops-test.csv";
     int size = getSize(filename);
     stops = (node *)malloc(size * sizeof(node));
-    
     int n = importStops(stops, size);
-
-    for (int i = 0; i < size; i++)
-    {
-        printf("%s\n", stops[i].node_id);
-    }
+    
     return 0;
 }
