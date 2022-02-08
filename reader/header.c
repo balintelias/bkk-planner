@@ -76,9 +76,45 @@ int importStops(node *stops, int linesCount)
     for (int i = 0; i < linesCount; i++)
     {
         fgets(line, LENGTH, input);
+
         strncpy(stops[i].node_id, line, 6);
         stops[i].node_id[6] = '\0';
         memmove(line, line + 7, strlen(line) - 7);
+
+        if (line[0] == '"')
+        {
+            //read until another "
+            int index = 1;
+            while (line[index] != '"')
+            {
+                stops[i].node_name[index - 1] = line[index];
+                index++;
+            }
+            stops[i].node_name[index - 1] = '\0';
+            memmove(line, line + index, strlen(line) - index);
+            memmove(line, line + 2, strlen(line) - 2);
+        }
+        else
+        {
+            //read until ,
+            int index = 0;
+            while (line[index] != ',')
+            {
+                stops[i].node_name[index] = line[index];
+                index++;
+            }
+            stops[i].node_name[index] = '\0';
+            memmove(line, line + index, strlen(line) - index);
+        }
+
+        char *bfr;
+        stops[i].node_lat = strtod(line, &bfr);
+        bfr = bfr + 1;
+        strcpy(line, bfr);
+        stops[i].node_lon = strtod(line, &bfr);
+        bfr = bfr + 1;
+        strcpy(line, bfr);
+
         memset(line, '\0', LENGTH);
     }
     fclose(input);
