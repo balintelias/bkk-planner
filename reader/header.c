@@ -69,7 +69,7 @@ int getSize(char *filename)
 
 int importStops(node *stops, int linesCount)
 {
-    FILE *input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-test.csv", "r");
+    FILE *input = fopen("/home/elijah/PROGprojects/bkk/ascii/stops-ascii.csv", "r");
     char line[LENGTH];
     fgets(line, LENGTH, input);
 
@@ -77,9 +77,10 @@ int importStops(node *stops, int linesCount)
     {
         fgets(line, LENGTH, input);
 
-        strncpy(stops[i].node_id, line, 6);
-        stops[i].node_id[6] = '\0';
-        memmove(line, line + 7, strlen(line) - 7);
+        int toRead = strchr(line, ',') - line + 1;
+        strncpy(stops[i].node_id, line, toRead);
+        stops[i].node_id[toRead] = '\0';
+        memmove(line, line + toRead, strlen(line) - toRead);
 
         if (line[0] == '"')
         {
@@ -104,7 +105,7 @@ int importStops(node *stops, int linesCount)
                 index++;
             }
             stops[i].node_name[index] = '\0';
-            memmove(line, line + index, strlen(line) - index);
+            memmove(line, line + index + 1, strlen(line) - index - 1);
         }
 
         char *bfr;

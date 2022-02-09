@@ -16,20 +16,18 @@ int main(void)
 {
     //schematic for reading files:
     node *stops = (node *)malloc(sizeof(node));
-    char filename[100] = "/home/elijah/PROGprojects/bkk/ascii/stops-test.csv";
+    char filename[100] = "/home/elijah/PROGprojects/bkk/ascii/stops-ascii.csv";
     int size = getSize(filename);
     stops = (node *)malloc(size * sizeof(node));
     int n = importStops(stops, size);
 
-    printf("%s\n", stops[0].node_id);
-    printf("%s\n", stops[0].node_name);
-    printf("%lf\n", stops[0].node_lat);
-    printf("%lf\n\n", stops[0].node_lon);
-
-    printf("%s\n", stops[1].node_id);
-    printf("%s\n", stops[1].node_name);
-    printf("%lf\n", stops[1].node_lat);
-    printf("%lf\n", stops[1].node_lon);
+    for (int i = 0; i < size; i++)
+    {
+        printf("%s \n", stops[i].node_id);
+        printf("%s ", stops[i].node_name);
+        printf("%lf ", stops[i].node_lat);
+        printf("%lf\n", stops[i].node_lon);
+    }
 
     return 0;
 }

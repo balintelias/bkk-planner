@@ -3,7 +3,8 @@
 #executables
 *.out
 /reader/reader
-
 /source/source
+
+/reader/output
 *.csv
 *.gch
