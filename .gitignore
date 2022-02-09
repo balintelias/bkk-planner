@@ -8,3 +8,6 @@
 /reader/output
 *.csv
 *.gch
+*.csv#
+
+/reader/ptr.c
