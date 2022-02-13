@@ -30,7 +30,7 @@ int main(void)
     }
 
     //unnecessary comment
-    //another
+    //another one
 
     return 0;
 }
