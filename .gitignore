@@ -4,6 +4,7 @@
 *.out
 /reader/reader
 /source/source
+*.exe
 
 /reader/output
 *.csv
