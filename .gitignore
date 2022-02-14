@@ -6,9 +6,13 @@
 /source/source
 *.exe
 
+#output files
 /reader/output
+
+#extensions
 *.csv
 *.gch
 *.csv#
 
+#files
 /reader/ptr.c
